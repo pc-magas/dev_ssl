@@ -15,7 +15,7 @@ if  [[ ! -f ${CA_CERT} ]] || [[ ! -f ${CA_KEY} ]]; then
     echo "GENERATING CA CERTIFICATE"
     openssl genrsa -out ${CA_KEY} 2048
     openssl req -x509 -new -nodes \
-        -key ${CA_KEY} -subj "/CN=example.local/C=GR/L=ATTICA" \
+        -key ${CA_KEY} -subj "/C=GR/L=ATTICA" \
         -days 1825 -out ${CA_CERT}
     echo "DONE"
     ls -l
@@ -31,8 +31,8 @@ echo "CREATING CERTIFICATE"
 
 openssl req -new -sha512 -keyout ${KEY_PATH} -nodes -out ${SIGNING_REQUEST} -config ${BASEDIR}/ssl_config
 echo "SIGNING CERTIFICATE using CA"
-
-openssl x509 -req -days 9000 -sha512 -in ${SIGNING_REQUEST} -CAkey ${CA_KEY} -CA ${CA_CERT} -CAcreateserial -out ${CERTIFICATE_PATH} 
+ls -l ${SIGNING_REQUEST}
+openssl x509 -req -days 9000 -sha512 -in ${SIGNING_REQUEST} -CAkey ${CA_KEY} -CA ${CA_CERT} -CAcreateserial -extfile ${BASEDIR}/v3.sign -out ${CERTIFICATE_PATH} 
 
 rm -rf ${SIGNING_REQUEST}
 
