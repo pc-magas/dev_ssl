@@ -32,7 +32,7 @@ echo "CREATING CERTIFICATE"
 openssl req -new -sha512 -keyout ${KEY_PATH} -nodes -out ${SIGNING_REQUEST} -config ${BASEDIR}/ssl_config
 echo "SIGNING CERTIFICATE using CA"
 ls -l ${SIGNING_REQUEST}
-openssl x509 -req -days 9000 -sha512 -in ${SIGNING_REQUEST} -CAkey ${CA_KEY} -CA ${CA_CERT} -CAcreateserial -extfile ${BASEDIR}/v3.sign -out ${CERTIFICATE_PATH} 
+openssl x509 -req -days 9000 -startdate  -sha512 -in ${SIGNING_REQUEST} -CAkey ${CA_KEY} -CA ${CA_CERT} -CAcreateserial -extfile ${BASEDIR}/v3.sign -out ${CERTIFICATE_PATH} 
 
 rm -rf ${SIGNING_REQUEST}
 

@@ -8,4 +8,4 @@ countryName         = GR
 stateOrProvinceName = Attica
 localityName        = Echarnes
 organizationName    = PC_MAGAS
-
+commonName          = example.local
